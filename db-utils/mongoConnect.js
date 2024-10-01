@@ -5,17 +5,19 @@ dotenv.config();
 
 const dbCluster = process.env.DB_CLUSTER || "";
 
-const dbName = process.env.DB_NAME || "";
-
 const dbUserName = process.env.DB_USERNAME || "";
 
 const dbPassword = process.env.DB_PASSWORD || "";
 
-const cloudURI = `mongodb+srv://${dbUserName}:${dbPassword}@${dbCluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
+const dbName = process.env.DB_NAME || "";
+
+const cloudURI = `mongodb+srv://${dbUserName}:${dbPassword}@${dbCluster}?retryWrites=true&w=majority&appName=Cluster0`;
 
 const mongoConnect = async () => {
   try {
-    await mongoose.connect(cloudURI);
+    await mongoose.connect(cloudURI, {
+      dbName: dbName,
+    });
     console.log("Db connection established");
   } catch (error) {
     console.error(error);
