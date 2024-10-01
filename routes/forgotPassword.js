@@ -27,7 +27,7 @@ forgotPassRouter.post("/", async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: "rockr1204@gmail.com",
+      from: process.env.GMAIL,
       to: user.recoveryEmail,
       subject: "Password Reset Email",
       html: `
