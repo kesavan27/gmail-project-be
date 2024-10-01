@@ -11,17 +11,14 @@ const dbPassword = process.env.DB_PASSWORD || "";
 
 const dbName = process.env.DB_NAME || "";
 
-const cloudURI = `mongodb+srv://${dbUserName}:${dbPassword}@${dbCluster}?retryWrites=true&w=majority&appName=Cluster0`;
+const cloudURI = `mongodb+srv://${dbUserName}:${dbPassword}@${dbCluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
 const mongoConnect = async () => {
   try {
-    await mongoose.connect(cloudURI, {
-      dbName: dbName,
-    });
+    await mongoose.connect(cloudURI);
     console.log("Db connection established");
   } catch (error) {
     console.error(error);
   }
 };
-
 export default mongoConnect;
