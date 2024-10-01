@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import { userModel } from "../db-utils/model.js";
-import transporter  from "../mail-utils/mail-util.js";
+import { transporter } from "../mail-utils/mail-util.js";
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ forgotPassRouter.post("/", async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: process.env.GMAIL,
+      from: "rockr1204@gmail.com",
       to: user.recoveryEmail,
       subject: "Password Reset Email",
       html: `
